@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
 import { CATEGORIES } from './data'
+import CategoryFilters from './CategoryFilters.js'
+import TaskList from './TaskList.js'
 
 class App extends React.Component {
 
@@ -34,17 +36,33 @@ class App extends React.Component {
         text: 'Tidy house',
         category: 'Misc'
       }
-    ]
+    ], 
+    selectedCat: 'All'
   }
+
+  selectCat = (cat) => {
+    console.log(cat)
+    this.setState({
+      selectedCat: cat
+    })
+    // change state of selectedCat
+  }
+
+  // componentDidMount(){
+   
+  // }
 
   render() {
     return (
       <div className="App">
         <h2>My tasks</h2>
+        <div>
+          <CategoryFilters filter={this.selectCat} categories={CATEGORIES} /> 
+          <TaskList filter={this.selectCat} selected={this.state.selectedCat} tasks={this.state.tasks} /> 
+        </div>
       </div>
     );
   }
 }
-
 
 export default App;
